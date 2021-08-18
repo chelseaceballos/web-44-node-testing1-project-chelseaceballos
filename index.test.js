@@ -116,10 +116,34 @@ describe('[Exercise 6] Car', () => {
   beforeEach(() => {
     focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
   })
-  // test('[15] driving the car returns the updated odometer', () => {})
-  // test('[16] driving the car uses gas', () => {})
-  // test('[17] refueling allows to keep driving', () => {})
-  // test('[18] adding fuel to a full tank has no effect', () => {})
+   test('[15] driving the car returns the updated odometer', () => {
+    expect(focus.drive(100)).toBe(100) // adds miles driven
+    expect(focus.drive(100)).toBe(200)
+    expect(focus.drive(100)).toBe(300)
+    expect(focus.drive(200)).toBe(500)
+    
+  })
+   test('[16] driving the car uses gas', () => {
+    focus.drive(600)
+    expect(focus.drive(1)).toBe(600) // cannot surpass vehicle ability to drive 600mi per tank
+    expect(focus.drive(1)).toBe(600) // no more gas in tank after 600 miles
+    expect(focus.drive(1)).toBe(600) // must refuel if driven over 600 mi
+    expect(focus.tank).toBe(0)
+   })
+   test('[17] refueling allows to keep driving', () => {
+    focus.drive(600)
+    focus.refuel(10) // in gallons = 300 miles = 1/2 tank
+    focus.drive(600)
+    expect(focus.odometer).toBe(900)
+    focus.refuel(20) // in gallons = 600 miles = full tank
+    focus.drive(600) 
+    expect(focus.odometer).toBe(1500) // odometer + 600driven miles = 1500
+   })
+   test('[18] adding fuel to a full tank has no effect', () => {
+    focus.refuel(200) // in gallons = 6000 miles = 10 full tanks
+    focus.drive(1000) 
+    expect(focus.odometer).toBe(1500)
+   })
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
