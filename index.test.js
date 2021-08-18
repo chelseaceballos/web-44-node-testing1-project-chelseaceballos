@@ -141,8 +141,9 @@ describe('[Exercise 6] Car', () => {
    })
    test('[18] adding fuel to a full tank has no effect', () => {
     focus.refuel(200) // in gallons = 6000 miles = 10 full tanks
-    focus.drive(1000) 
-    expect(focus.odometer).toBe(1500)
+    focus.drive(1000) // drives over 600 with insane amount of gas in tank, 
+    //but car's odometer will only reach 600, because that's how much fits truck
+    expect(focus.odometer).toBe(600)
    })
 })
 
