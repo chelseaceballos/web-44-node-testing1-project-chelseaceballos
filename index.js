@@ -8,6 +8,7 @@
  */
 function trimProperties(obj) {
   // ✨ implement
+  console.log(car.drive(10))
 }
 
 /**
